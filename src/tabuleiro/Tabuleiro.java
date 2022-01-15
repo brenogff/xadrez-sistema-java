@@ -36,4 +36,9 @@ public class Tabuleiro {
 	public Peça peça(Posição posição) {
 		return peças[posição.getLinha()][posição.getColuna()];
 	}
+	
+	public void colocarPeça(Peça peça, Posição posição) {
+		peças[posição.getLinha()][posição.getColuna()] = peça;
+		peça.posição = posição;
+	}
 }
