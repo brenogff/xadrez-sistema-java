@@ -9,5 +9,11 @@ public class XadrezException extends TabuleiroException{
 	public XadrezException (String mensagem){
 		super(mensagem);
 }
+
+
+	public char[] getMensagem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
