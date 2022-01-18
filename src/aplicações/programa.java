@@ -18,7 +18,7 @@ public class programa {
 		
 			try {
 				UI.clearScreen();
-				UI.printTabuleiro(partidaXadrez.getPeças());
+				UI.printPartida(partidaXadrez);
 				
 				System.out.println();
 				System.out.print("Inicio: ");
