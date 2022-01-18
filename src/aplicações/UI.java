@@ -61,9 +61,16 @@ public class UI {
 		printPeçasCapturadas(capturada);
 		System.out.println();
 		System.out.println("Lance: " + partidaXadrez.getTurno());
+		if (!partidaXadrez.getCheckMate()) {
+			
 		System.out.println("Aguardando jogador: " + partidaXadrez.getJogadorAtual());
 		if (partidaXadrez.getCheck()) {
 			System.out.println("XEQUE!");
+			}
+		}
+		else {
+			System.out.println("XEQUE-MATE!");
+			System.out.println("Vencedor: " + partidaXadrez.getJogadorAtual());
 		}
 	}
 		

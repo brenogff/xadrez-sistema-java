@@ -16,6 +16,7 @@ public class PartidaXadrez {
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
 	private boolean check;
+	private boolean checkMate;
 	
 	private List<Peça> PeçasNoTabuleiro = new ArrayList<>();
 	private List<Peça> CapturaPeças = new ArrayList<>();
@@ -39,6 +40,10 @@ public class PartidaXadrez {
 		return check;
 	}
 
+	public boolean getCheckMate() {
+		return checkMate;
+	}
+	
 	public PeçaXadrez[][] getPeças() {
 		PeçaXadrez[][] matriz = new PeçaXadrez[tabuleiro.getLinhas()][tabuleiro.getColunas()]; 
 		for (int i=0; i<tabuleiro.getLinhas(); i++) {
@@ -70,10 +75,18 @@ public class PartidaXadrez {
 		
 		check = (testeCheck(adversario(jogadorAtual))) ? true : false;
 		
-		proximoTurno();
+		if (testeCheckMate(adversario(jogadorAtual))) {
+			checkMate = true;
+		}
+		
+		else {
+			proximoTurno();
+		}
+		
 		return (PeçaXadrez) capturaPeça;
+
 	}
-	
+		
 	private Peça façaMovimento(Posição inicio, Posição destino) {
 		Peça p = tabuleiro.removerPeça(inicio);
 		Peça capturaPeça = tabuleiro.removerPeça(destino);
@@ -152,6 +165,33 @@ public class PartidaXadrez {
 		return false;
 	}
 	
+	private boolean testeCheckMate(Cor cor) {
+		if (!testeCheck(cor)) {
+			return false;
+		}
+		
+		List<Peça> list = PeçasNoTabuleiro.stream().filter(x -> ((PeçaXadrez)x).getCor() == cor).collect(Collectors.toList());
+		for (Peça p : list) {
+			boolean[][] matriz = p.movimentosPossiveis();
+			for (int i=0; i<tabuleiro.getLinhas(); i++) {
+				for (int j=0; j<tabuleiro.getColunas(); j++) {
+					if (matriz[i][j]) {
+						Posição inicio = ((PeçaXadrez)p).getPosiçãoXadrez().toPosição();
+						Posição destino =  new Posição(i, j);
+						Peça capturaPeça = façaMovimento(inicio, destino);
+						boolean testeCheck = testeCheck(cor);
+						desfaçaMovimento(inicio, destino, capturaPeça);
+						if (!testeCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	private void colocarNovaPeça(char coluna, int linha, PeçaXadrez peça) {
 		tabuleiro.colocarPeça(peça, new PosiçãoXadrez(coluna, linha).toPosição());
 		PeçasNoTabuleiro.add(peça);
@@ -161,19 +201,13 @@ public class PartidaXadrez {
 	private void inicioJogo() {
 		
 		
-		colocarNovaPeça('C', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('C', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('D', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('E', 2, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('E', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('D', 1, new Rei(tabuleiro, Cor.BRANCO));
-
-		colocarNovaPeça('C', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('C', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('D', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('E', 7, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('E', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('D', 8, new Rei(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('H', 7, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('D', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('E', 1, new Rei(tabuleiro, Cor.BRANCO));
+		
+		colocarNovaPeça('B', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('A', 8, new Rei(tabuleiro, Cor.PRETO));
+		
 		
 	}
 }
