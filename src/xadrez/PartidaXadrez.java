@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import tabuleiro.Peça;
 import tabuleiro.Posição;
 import tabuleiro.Tabuleiro;
+import xadrez.peças.Bispo;
 import xadrez.peças.Peão;
 import xadrez.peças.Rei;
 import xadrez.peças.Torre;
@@ -206,6 +207,8 @@ public class PartidaXadrez {
 		
 		colocarNovaPeça('A', 1, new Torre(tabuleiro, Cor.BRANCO));
 		colocarNovaPeça('H', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('C', 1, new Bispo(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('F', 1, new Bispo(tabuleiro, Cor.BRANCO));
 		colocarNovaPeça('E', 1, new Rei(tabuleiro, Cor.BRANCO));
 		colocarNovaPeça('A', 2, new Peão(tabuleiro, Cor.BRANCO));
 		colocarNovaPeça('B', 2, new Peão(tabuleiro, Cor.BRANCO));
@@ -218,6 +221,8 @@ public class PartidaXadrez {
 		
 		colocarNovaPeça('A', 8, new Torre(tabuleiro, Cor.PRETO));
 		colocarNovaPeça('H', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('C', 8, new Bispo(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('F', 8, new Bispo(tabuleiro, Cor.PRETO));
 		colocarNovaPeça('E', 8, new Rei(tabuleiro, Cor.PRETO));
 		colocarNovaPeça('A', 7, new Peão(tabuleiro, Cor.PRETO));
 		colocarNovaPeça('B', 7, new Peão(tabuleiro, Cor.PRETO));
