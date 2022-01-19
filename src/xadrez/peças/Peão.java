@@ -3,12 +3,16 @@ package xadrez.peças;
 import tabuleiro.Posição;
 import tabuleiro.Tabuleiro;
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PeçaXadrez;
 
 public class Peão extends PeçaXadrez {
 
-	public Peão(Tabuleiro tabuleiro, Cor cor) {
+	private PartidaXadrez partidaXadrez;
+	
+	public Peão(Tabuleiro tabuleiro, Cor cor, PartidaXadrez partidaXadrez) {
 		super(tabuleiro, cor);
+		this.partidaXadrez = partidaXadrez;
 		
 	}
 
@@ -39,8 +43,22 @@ public class Peão extends PeçaXadrez {
 			if (getTabuleiro().posiçãoExistente(p) && temPeçaAdversaria(p)) {
 			matriz[p.getLinha()][p.getColuna()] = true;
 			}
+			
+			//movimento especial En Passant - Brancas
+			if (posição.getLinha() == 3) {
+				Posição esquerda = new Posição(posição.getLinha(), posição.getColuna() - 1);
+					if (getTabuleiro().posiçãoExistente(esquerda) && temPeçaAdversaria(esquerda) && getTabuleiro().peça(esquerda) == partidaXadrez.getEnPassant()) {
+						matriz[esquerda.getLinha() - 1][esquerda.getColuna()] = true;
+					}
+			}
+			
+				Posição direita = new Posição(posição.getLinha(), posição.getColuna() + 1);
+					if (getTabuleiro().posiçãoExistente(direita) && temPeçaAdversaria(direita) && getTabuleiro().peça(direita) == partidaXadrez.getEnPassant()) {
+						matriz[direita.getLinha() - 1][direita.getColuna()] = true;
+			}
 		
 		}
+		
 		else {
 			
 			p.setValores(posição.getLinha() + 1, posição.getColuna());
@@ -63,6 +81,20 @@ public class Peão extends PeçaXadrez {
 			if (getTabuleiro().posiçãoExistente(p) && temPeçaAdversaria(p)) {
 			matriz[p.getLinha()][p.getColuna()] = true;
 			}
+			
+			//movimento especial En Passant - Pretas
+			if (posição.getLinha() == 4) {
+				Posição esquerda = new Posição(posição.getLinha(), posição.getColuna() - 1);
+					if (getTabuleiro().posiçãoExistente(esquerda) && temPeçaAdversaria(esquerda) && getTabuleiro().peça(esquerda) == partidaXadrez.getEnPassant()) {
+						matriz[esquerda.getLinha() + 1][esquerda.getColuna()] = true;
+					}
+			}
+			
+				Posição direita = new Posição(posição.getLinha(), posição.getColuna() + 1);
+					if (getTabuleiro().posiçãoExistente(direita) && temPeçaAdversaria(direita) && getTabuleiro().peça(direita) == partidaXadrez.getEnPassant()) {
+						matriz[direita.getLinha() + 1][direita.getColuna()] = true;
+			}
+		
 	}
 		return matriz;
 	}
