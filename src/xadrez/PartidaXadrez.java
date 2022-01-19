@@ -8,6 +8,7 @@ import tabuleiro.Peça;
 import tabuleiro.Posição;
 import tabuleiro.Tabuleiro;
 import xadrez.peças.Bispo;
+import xadrez.peças.Cavalo;
 import xadrez.peças.Peão;
 import xadrez.peças.Rei;
 import xadrez.peças.Torre;
@@ -205,33 +206,37 @@ public class PartidaXadrez {
 	private void inicioJogo() {
 		
 		
-		colocarNovaPeça('A', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('H', 1, new Torre(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('C', 1, new Bispo(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('F', 1, new Bispo(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('E', 1, new Rei(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('A', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('B', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('C', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('D', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('E', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('F', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('G', 2, new Peão(tabuleiro, Cor.BRANCO));
-		colocarNovaPeça('H', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('a', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('h', 1, new Torre(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('b', 1, new Cavalo(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('g', 1, new Cavalo(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('c', 1, new Bispo(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('f', 1, new Bispo(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('e', 1, new Rei(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('a', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('b', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('c', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('d', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('e', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('f', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('g', 2, new Peão(tabuleiro, Cor.BRANCO));
+		colocarNovaPeça('h', 2, new Peão(tabuleiro, Cor.BRANCO));
 		
-		colocarNovaPeça('A', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('H', 8, new Torre(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('C', 8, new Bispo(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('F', 8, new Bispo(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('E', 8, new Rei(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('A', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('B', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('C', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('D', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('E', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('F', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('G', 7, new Peão(tabuleiro, Cor.PRETO));
-		colocarNovaPeça('H', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('a', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('h', 8, new Torre(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('b', 8, new Cavalo(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('g', 8, new Cavalo(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('c', 8, new Bispo(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('f', 8, new Bispo(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('e', 8, new Rei(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('a', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('b', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('c', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('d', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('e', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('f', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('g', 7, new Peão(tabuleiro, Cor.PRETO));
+		colocarNovaPeça('h', 7, new Peão(tabuleiro, Cor.PRETO));
 		
 	}
 }

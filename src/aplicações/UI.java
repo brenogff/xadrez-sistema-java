@@ -51,7 +51,7 @@ public class UI {
 			return new PosiçãoXadrez(coluna, linha);
 		}
 		catch (RuntimeException e) {
-			throw new InputMismatchException("Erro ao ler posição de xadrez. Valores válidos são de A1 até H8");
+			throw new InputMismatchException("Erro ao ler posição de xadrez. Valores válidos são de a1 até h8");
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class UI {
 			}
 			System.out.println();
 		}
-		System.out.println("  A B C D E F G H");
+		System.out.println("  a b c d e f g h");
 	}
 	
 	public static void printTabuleiro(PeçaXadrez[][] peças, boolean[][] movimentosPossiveis) {
@@ -93,7 +93,7 @@ public class UI {
 			}
 			System.out.println();
 		}
-		System.out.println("  A B C D E F G H");
+		System.out.println("  a b c d e f g h");
 	}
 	
 	private static void printPeça(PeçaXadrez peça, boolean background) {
