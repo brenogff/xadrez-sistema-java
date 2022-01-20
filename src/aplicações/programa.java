@@ -40,6 +40,17 @@ public class programa {
 				if (capturaPeça != null) {
 					capturada.add(capturaPeça); 
 				}
+				
+				if (partidaXadrez.getPromoção() != null) {
+					System.out.print("Digite a peça que deseja promover (B/C/T/D): ");
+					String tipo = sc.nextLine().toUpperCase();
+					while (!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("T") && !tipo.equals("D")) {
+						System.out.print("Valor inválido! Digite a peça que deseja promover (B/C/T/D): ");
+						tipo = sc.nextLine().toUpperCase();
+					}
+					partidaXadrez.substituirPeçaPromovida(tipo);
+				}  
+
 			}
 			
 				catch(XadrezException e) {

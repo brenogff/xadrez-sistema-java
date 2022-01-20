@@ -22,6 +22,8 @@ public class PartidaXadrez {
 	private boolean check;
 	private boolean checkMate;
 	private PeçaXadrez enPassant;
+	private PeçaXadrez promoção;
+
 	
 	private List<Peça> PeçasNoTabuleiro = new ArrayList<>();
 	private List<Peça> CapturaPeças = new ArrayList<>();
@@ -52,6 +54,12 @@ public class PartidaXadrez {
 	public PeçaXadrez getEnPassant() {
 		return enPassant;
 	}
+	
+	public PeçaXadrez getPromoção() {
+		return promoção;
+	}
+
+	
 	
 	public PeçaXadrez[][] getPeças() {
 		PeçaXadrez[][] matriz = new PeçaXadrez[tabuleiro.getLinhas()][tabuleiro.getColunas()]; 
@@ -84,6 +92,15 @@ public class PartidaXadrez {
 		
 		PeçaXadrez peçaMoveu = (PeçaXadrez)tabuleiro.peça(destino);
 		
+		//movimentoespeal Promoção
+				promoção = null;
+				if (peçaMoveu instanceof Peão) {
+					if ((peçaMoveu.getCor() == Cor.BRANCO && destino.getLinha() == 0) || (peçaMoveu.getCor() == Cor.PRETO && destino.getLinha() == 7)) {
+						promoção = (PeçaXadrez)tabuleiro.peça(destino);
+						promoção = substituirPeçaPromovida("D");
+				}
+			}	
+		
 		check = (testeCheck(adversario(jogadorAtual))) ? true : false;
 		
 		if (testeCheckMate(adversario(jogadorAtual))) {
@@ -105,9 +122,37 @@ public class PartidaXadrez {
 		return (PeçaXadrez) capturaPeça;
 
 	}
+	
+	public PeçaXadrez substituirPeçaPromovida(String tipo) {
+		if (promoção == null) {
+			throw new IllegalStateException("Não há peça para ser promovida");	
+		}
+		
+		if (!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("T") && !tipo.equals("D") ) {
+			return promoção;
+		}
+		
+		Posição pos = promoção.getPosiçãoXadrez().toPosição();
+		Peça p = tabuleiro.removerPeça(pos);
+		PeçasNoTabuleiro.remove(p);
+		
+		PeçaXadrez novaPeça = novaPeça(tipo, promoção.getCor());
+		tabuleiro.colocarPeça(novaPeça, pos);
+		PeçasNoTabuleiro.add(novaPeça);
+		
+		return novaPeça;
+	}   
+
+	private PeçaXadrez novaPeça(String tipo, Cor cor) {
+		if (tipo.equals("B")) return new Bispo(tabuleiro, cor);
+		if (tipo.equals("C")) return new Cavalo(tabuleiro, cor);
+		if (tipo.equals("D")) return new Rainha(tabuleiro, cor);
+		return new Torre(tabuleiro, cor);
+	}
+
 		
 	private Peça façaMovimento(Posição inicio, Posição destino) {
-		PeçaXadrez p = (PeçaXadrez)tabuleiro.removerPeça(inicio);
+ 		PeçaXadrez p = (PeçaXadrez)tabuleiro.removerPeça(inicio);
 		p.aumentarContarMovimento();
 		Peça capturaPeça = tabuleiro.removerPeça(destino);
 		tabuleiro.colocarPeça(p, destino);
