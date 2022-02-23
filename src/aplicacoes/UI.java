@@ -1,4 +1,4 @@
-package aplicações;
+package aplicacoes;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 import xadrez.Cor;
 import xadrez.PartidaXadrez;
-import xadrez.PeçaXadrez;
-import xadrez.PosiçãoXadrez;
+import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 
 public class UI {
 	
@@ -42,23 +42,23 @@ public class UI {
 		System.out.flush();
 	}
 		
-	public static PosiçãoXadrez lerPosiçãoXadrez(Scanner sc) {
+	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
 		
 		try {
 			String s = sc.nextLine();
 			char coluna = s.charAt(0);
 			int linha = Integer.parseInt(s.substring(1));
-			return new PosiçãoXadrez(coluna, linha);
+			return new PosicaoXadrez(coluna, linha);
 		}
 		catch (RuntimeException e) {
-			throw new InputMismatchException("Erro ao ler posição de xadrez. Valores válidos são de a1 até h8");
+			throw new InputMismatchException("Erro ao ler posicao de xadrez. Valores válidos são de a1 até h8");
 		}
 	}
 	
-	public static void printPartida(PartidaXadrez partidaXadrez, List<PeçaXadrez> capturada) {
-		printTabuleiro(partidaXadrez.getPeças());
+	public static void printPartida(PartidaXadrez partidaXadrez, List<PecaXadrez> capturada) {
+		printTabuleiro(partidaXadrez.getPecas());
 		System.out.println();
-		printPeçasCapturadas(capturada);
+		printPecasCapturadas(capturada);
 		System.out.println();
 		System.out.println("Lance: " + partidaXadrez.getTurno());
 		if (!partidaXadrez.getCheckMate()) {
@@ -74,50 +74,50 @@ public class UI {
 		}
 	}
 		
-	public static void printTabuleiro(PeçaXadrez[][] peças) {
-		for (int i=0; i<peças.length; i++) {
+	public static void printTabuleiro(PecaXadrez[][] pecas) {
+		for (int i=0; i<pecas.length; i++) {
 			System.out.print((8 - i) + " ");
-			for (int j=0; j<peças.length; j++) {
-				printPeça(peças[i][j], false);
+			for (int j=0; j<pecas.length; j++) {
+				printPeca(pecas[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 	}
 	
-	public static void printTabuleiro(PeçaXadrez[][] peças, boolean[][] movimentosPossiveis) {
-		for (int i=0; i<peças.length; i++) {
+	public static void printTabuleiro(PecaXadrez[][] pecas, boolean[][] movimentosPossiveis) {
+		for (int i=0; i<pecas.length; i++) {
 			System.out.print((8 - i) + " ");
-			for (int j=0; j<peças.length; j++) {
-				printPeça(peças[i][j], movimentosPossiveis[i][j]);
+			for (int j=0; j<pecas.length; j++) {
+				printPeca(pecas[i][j], movimentosPossiveis[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 	}
 	
-	private static void printPeça(PeçaXadrez peça, boolean background) {
+	private static void printPeca(PecaXadrez peca, boolean background) {
 		if (background) {
 			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
-    	if (peça == null) {
+    	if (peca == null) {
             System.out.print("-" + ANSI_RESET);
         }
         else {
-            if(peça.getCor() == Cor.BRANCO) {
-                System.out.print(ANSI_WHITE + peça + ANSI_RESET);
+            if(peca.getCor() == Cor.BRANCO) {
+                System.out.print(ANSI_WHITE + peca + ANSI_RESET);
             }
             else {
-                System.out.print(ANSI_YELLOW + peça + ANSI_RESET);
+                System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
             }
         }
         System.out.print(" ");
 	}
 	
-	private static void printPeçasCapturadas(List<PeçaXadrez> capturada) {
-		List<PeçaXadrez> branco = capturada.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
-		List<PeçaXadrez> preto = capturada.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
-		System.out.println("Peças capturadas: ");
+	private static void printPecasCapturadas(List<PecaXadrez> capturada) {
+		List<PecaXadrez> branco = capturada.stream().filter(x -> x.getCor() == Cor.BRANCO).collect(Collectors.toList());
+		List<PecaXadrez> preto = capturada.stream().filter(x -> x.getCor() == Cor.PRETO).collect(Collectors.toList());
+		System.out.println("Pecas capturadas: ");
 		System.out.print("Brancas: ");
 		System.out.print(ANSI_WHITE); 
 		System.out.println(Arrays.toString(branco.toArray())); 

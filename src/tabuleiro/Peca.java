@@ -1,15 +1,15 @@
 package tabuleiro;
 
-public abstract class Peça {
+public abstract class Peca {
 	
-	protected Posição posição;
+	protected Posicao posicao;
 	private Tabuleiro tabuleiro;
 	
 	
-	public Peça(Tabuleiro tabuleiro) {
+	public Peca(Tabuleiro tabuleiro) {
 		super();
 		this.tabuleiro = tabuleiro;
-		posição = null;
+		posicao = null;
 	}
 
 	protected Tabuleiro getTabuleiro() {
@@ -18,8 +18,8 @@ public abstract class Peça {
 	
 	public abstract boolean[][] movimentosPossiveis();
 	
-	public boolean movimentosPossiveis(Posição posição) {
-		return movimentosPossiveis()[posição.getLinha()][posição.getColuna()];
+	public boolean movimentosPossiveis(Posicao posicao) {
+		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
 	}
 	
 	public boolean temAlgumMovimentoPossivel() {

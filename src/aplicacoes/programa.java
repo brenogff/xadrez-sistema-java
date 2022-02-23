@@ -1,12 +1,12 @@
-package aplicações;
+package aplicacoes;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import xadrez.PartidaXadrez;
-import xadrez.PeçaXadrez;
-import xadrez.PosiçãoXadrez;
+import xadrez.PecaXadrez;
+import xadrez.PosicaoXadrez;
 import xadrez.XadrezException;
 
 public class programa {
@@ -15,7 +15,7 @@ public class programa {
 		
 		Scanner sc = new Scanner(System.in);
 		PartidaXadrez partidaXadrez = new PartidaXadrez();
-		List<PeçaXadrez> capturada = new ArrayList<>();
+		List<PecaXadrez> capturada = new ArrayList<>();
 		
 		while (!partidaXadrez.getCheckMate()) {
 		
@@ -25,30 +25,30 @@ public class programa {
 				
 				System.out.println();
 				System.out.print("Inicio: ");
-				PosiçãoXadrez inicio = UI.lerPosiçãoXadrez(sc);
+				PosicaoXadrez inicio = UI.lerPosicaoXadrez(sc);
 				
 				boolean [][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(inicio);
 				UI.clearScreen();
-				UI.printTabuleiro(partidaXadrez.getPeças(), movimentosPossiveis);
+				UI.printTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
 				
 				System.out.println();
 				System.out.print("Destino: ");
-				PosiçãoXadrez destino = UI.lerPosiçãoXadrez(sc);
+				PosicaoXadrez destino = UI.lerPosicaoXadrez(sc);
 			
-				PeçaXadrez capturaPeça = partidaXadrez.executarMovimentoPeça(inicio, destino);
+				PecaXadrez capturaPeca = partidaXadrez.executarMovimentoPeca(inicio, destino);
 				
-				if (capturaPeça != null) {
-					capturada.add(capturaPeça); 
+				if (capturaPeca != null) {
+					capturada.add(capturaPeca); 
 				}
 				
-				if (partidaXadrez.getPromoção() != null) {
-					System.out.print("Digite a peça que deseja promover (B/C/T/D): ");
+				if (partidaXadrez.getpromocao() != null) {
+					System.out.print("Digite a peca que deseja promover (B/C/T/D): ");
 					String tipo = sc.nextLine().toUpperCase();
 					while (!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("T") && !tipo.equals("D")) {
-						System.out.print("Valor inválido! Digite a peça que deseja promover (B/C/T/D): ");
+						System.out.print("Valor inválido! Digite a peca que deseja promover (B/C/T/D): ");
 						tipo = sc.nextLine().toUpperCase();
 					}
-					partidaXadrez.substituirPeçaPromovida(tipo);
+					partidaXadrez.substituirPecaPromovida(tipo);
 				}  
 
 			}
